@@ -1,0 +1,2 @@
+# Shop_Store
+通过使用react和nodejs实现一个商品后台的系统
