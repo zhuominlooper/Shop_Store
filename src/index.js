@@ -1,17 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
-
+import PubSub from 'pubsub-js'
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+ <App/>
+,
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+var mySubscriber = function (msg, data) {
+   switch(data){
+     case "show":
+      window.$('#myModal').modal('show'); break;
+      case "hide":
+      window.$('#myModal').modal('hide'); break ;
+      default:break
+   }
+
+};
+
+// add the function to the list of subscribers for a particular topic
+// we're keeping the returned token, in order to be able to unsubscribe
+// from the topic later on
+ PubSub.subscribe('Loading', mySubscriber);
+

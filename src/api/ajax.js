@@ -1,0 +1,34 @@
+import axios from "axios";
+import {  message } from 'antd';
+import PubSub from 'pubsub-js'
+//发送异步ajax请求的模块,封装axios
+//统一处理异常优化
+export default function ajax(url, data = {}, type = "GET") {
+    return new Promise((resolve,reject)=>{
+        PubSub.publish('Loading','show');
+        let promise
+        //执行请求
+        switch (type) {
+            case "GET":
+                promise= axios.get(url, {
+                    params: data
+                });break
+            case "POST":
+                promise= axios.post(url, data);break
+            case "PUT":
+                break
+            case "DELETE":
+                break
+            default:
+                break
+        }
+        promise.then(response=>{
+            resolve(response)
+        }).catch(err=>{
+            message.error(err.message)
+        }).finally(()=>{
+            PubSub.publish('Loading','hide');
+        })
+    })
+    
+}
