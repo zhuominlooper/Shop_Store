@@ -16,6 +16,7 @@ export default function ajax(url, data = {}, type = "GET") {
             case "POST":
                 promise= axios.post(url, data);break
             case "PUT":
+                promise= axios.put(url, data);break
                 break
             case "DELETE":
                 break
@@ -23,12 +24,16 @@ export default function ajax(url, data = {}, type = "GET") {
                 break
         }
         promise.then(response=>{
-            resolve(response)
+            PubSub.publish('Loading','hide');
+         if([404,500,400,503,502].indexOf(response.data.code)>-1){
+            message.warning(response.data.msg)
+             return
+         }
+        resolve(response.data)
         }).catch(err=>{
             message.error(err.message)
         }).finally(()=>{
             PubSub.publish('Loading','hide');
         })
-    })
-    
+    }) 
 }
