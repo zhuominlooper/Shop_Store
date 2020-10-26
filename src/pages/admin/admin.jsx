@@ -1,10 +1,19 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect,Route,Switch } from "react-router-dom";
 import { Layout } from "antd";
 import { memoryUtils } from "../../utils/memoryUtils";
 import './admin.less';
 import LeftNavComponent from "../../components/admin-left-nav/left-nav";
 import HeaderComponent from "../../components/admin-header/header";
+
+import HomePage from "../../pages/home/home";
+import CategoryPage from "../../pages/category/category";
+import BarPage from "../../pages/charts/bar";
+import LinePage from "../../pages/charts/line";
+import PiePage from "../../pages/charts/pie";
+import ProductPage from "../../pages/product/product";
+import RolePage from "../../pages/role/role";
+import UserPage from "../../pages/user/user";
 
 //登录的组件
 const { Header, Footer, Sider, Content } = Layout;
@@ -27,7 +36,19 @@ export default class AdminPage extends React.Component {
           <Header className="ant-layout-header">
               <HeaderComponent/>
           </Header>
-          <Content>Content</Content>
+          <Content>
+           <Switch>
+             <Route path="/home" component={HomePage}/>
+             <Route path="/category" component={CategoryPage}/>
+             <Route path="/product" component={ProductPage}/>
+             <Route path="/role" component={RolePage}/>
+             <Route path="/user" component={UserPage}/>
+             <Route path="/chart/bar" component={BarPage}/>
+             <Route path="/chart/line" component={LinePage}/>
+             <Route path="/chart/pie" component={PiePage}/>
+             <Redirect to='/home'/>
+           </Switch>
+          </Content>
           <Footer className="ant-footer">Footer</Footer>
         </Layout>
       </Layout>
