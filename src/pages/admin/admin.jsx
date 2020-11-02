@@ -26,17 +26,17 @@ export default class AdminPage extends React.Component {
      if(!user||!user._id){
          return <Redirect to="/login"/>
      }
-
         return (
+
         <Layout style={{height:"100%"}} >
         <Sider >
-            <LeftNavComponent/>
+            <LeftNavComponent />
         </Sider>
         <Layout >
           <Header className="ant-layout-header">
               <HeaderComponent/>
           </Header>
-          <Content>
+          <Content style={{backgroundColor:'#fff',margin:"24px 26px"}}>
            <Switch>
              <Route path="/home" component={HomePage}/>
              <Route path="/category" component={CategoryPage}/>

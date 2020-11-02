@@ -3,14 +3,8 @@ import React from "react";
 import './left-nav.less';
 import logo from "../../assets/images/shop-left-nav.png";
 import { Link,withRouter } from "react-router-dom";
-import { Menu, Button,Icon } from 'antd';
+import { Menu } from 'antd';
 import {
-  AppstoreOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  PieChartOutlined,
-  DesktopOutlined,
-  ContainerOutlined,
   MailOutlined,
 } from '@ant-design/icons';
 import { menuList } from "../../config/menuConfig";
