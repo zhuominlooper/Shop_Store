@@ -2,8 +2,6 @@
 //包含应用中所有接口的请求函数
 import ajax from "./ajax";
 import axios from "axios";
-import { resolveOnChange } from "antd/lib/input/Input";
-import { message } from "antd";
 //登录
 export const reqLogin=(...args)=>ajax('/login',...args,"POST")
 
@@ -18,6 +16,41 @@ export const reqRegister=(...args)=>ajax('/login/register',...args,"POST")
 
 //重置密码
 export const reqForgetPwd=(...args)=>ajax('/login/forgetpwd',...args,"PUT")
+
+//获取一级/二级商品分类列表
+export const reqCategotyList=(...args)=>ajax('/manage/category/list',...args)
+
+//添加分类
+export const reqAddCategoty=(...args)=>ajax('/manage/category/add',...args,"POST")
+
+//更新分类
+export const reqUpdateCategoty=(...args)=>ajax('/manage/category/update',...args,"PUT")
+
+//分页获取商品的显示
+export const reqProducts=(...args)=>ajax('/manage/product/list',...args,"POST")
+
+//根据商品名称或者描述查询
+export const reqSearchProducts=(...args)=>ajax('/manage/product/search',...args,"POST")
+
+//根据id获取分类
+export const reqCategory=(...args)=>ajax('/manage/category/info',...args)
+
+//更新商品上架或者下架
+export const reqUpdateStatus=(...args)=>ajax('/manage/product/updatestatus',...args,"POST")
+
+//删除图片
+export const reqDeleteImg=(...args)=>ajax('/manage/img/delete',...args,"POST")
+
+//添加或者更新商品
+export const reqAddOrUpdateProduct=(product)=>ajax(`/manage/product/${product._id?'update':'add'}`,product,"POST")
+
+//获取角色的数据
+export  const reqGetRoles=()=>ajax('/manage/role/list')
+
+
+
+
+
 
 //使用jsonp发送请求获取天气,不准确
 // export const reqWeather=(city)=>{

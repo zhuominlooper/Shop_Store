@@ -73,7 +73,6 @@ export default class RegisterComponent extends React.Component {
         }
         //发送请求返回验证码
         const result = await reqGetConfCode({ phoneCode })
-        console.log('result', result)
         if (result.code === 200) {
             this.md5Code = result.data
             this.timeControl = setInterval(() => {

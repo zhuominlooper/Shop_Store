@@ -15,10 +15,9 @@ import { menuList } from "../../config/menuConfig";
     const {pathname}=this.props.location
     return menuList.map(item => {
       if (item.children) {
-        if(item.children.findIndex(x=>x.key===pathname)>-1){
+        if(item.children.findIndex(x=>pathname.indexOf(x.key)===0)>-1){
           this.openKey=item.key
-        }
-       
+        }      
         return (
           <SubMenu
             key={item.key}
@@ -52,10 +51,12 @@ import { menuList } from "../../config/menuConfig";
   }
   render() {
     //得到当前请求的路径
-    const {pathname}=this.props.location
+    let pathname=this.props.location.pathname
+    if(`${pathname}`.indexOf('/product')===0){//当前请求是商品或者其子路由
+      pathname='/product'
+    }
     const menuNodes = this.menuNodes
     const  openKey= this.openKey
-    console.log(openKey,pathname)
     return (
       <div className="left-nav">
         <Link to='/home' className="left-nav-header">

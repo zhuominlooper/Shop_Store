@@ -11,7 +11,7 @@ import CategoryPage from "../../pages/category/category";
 import BarPage from "../../pages/charts/bar";
 import LinePage from "../../pages/charts/line";
 import PiePage from "../../pages/charts/pie";
-import ProductPage from "../../pages/product/product";
+import ProductHomePage from "../../pages/product/home";
 import RolePage from "../../pages/role/role";
 import UserPage from "../../pages/user/user";
 
@@ -28,7 +28,7 @@ export default class AdminPage extends React.Component {
      }
         return (
 
-        <Layout style={{height:"100%"}} >
+        <Layout style={{minHeight:"100%"}} >
         <Sider >
             <LeftNavComponent />
         </Sider>
@@ -40,7 +40,7 @@ export default class AdminPage extends React.Component {
            <Switch>
              <Route path="/home" component={HomePage}/>
              <Route path="/category" component={CategoryPage}/>
-             <Route path="/product" component={ProductPage}/>
+             <Route path="/product" component={ProductHomePage}/>
              <Route path="/role" component={RolePage}/>
              <Route path="/user" component={UserPage}/>
              <Route path="/chart/bar" component={BarPage}/>

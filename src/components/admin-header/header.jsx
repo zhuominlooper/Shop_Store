@@ -16,11 +16,9 @@ const { confirm } = Modal;
  class HeaderComponent extends React.Component {
     constructor() {
         super()
-        this.time = null
         this.ipConfig = null//当前ip
         this.adress = null//当前位置信息
         this.state = {
-            currentTime: moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
             username: memoryUtils.user.username,
             currentImg: null,
             currentWeather: null,
@@ -32,11 +30,6 @@ const { confirm } = Modal;
     //第一次reder执行，执行一次，执行异步操作，发请求，定时器
     //每隔一秒去更新
     componentDidMount = async () => {
-        this.time = setInterval(() => {
-            this.setState({
-                currentTime: moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
-            })
-        }, 1000);
         //获取当前本机IP
         this.ipConfig = document.getElementById('ip').innerHTML
         //获取当前位置信息
@@ -46,7 +39,7 @@ const { confirm } = Modal;
         //绑定值
         this.setState({
             currentAdress: result.data.lives[0].city,
-            currentWeather: result.data.lives[0].weather,//晴
+            currentWeather: result.data.lives[0].weather,//晴，阴，多云
             temperature:result.data.lives[0].temperature
         })
     }
@@ -61,13 +54,11 @@ const { confirm } = Modal;
              this.props.history.replace('/login')
             },
             onCancel() {
-              console.log('Cancel');
             },
           });
     }
     //销毁
     componentWillUnmount = () => {
-        clearInterval(this.time)
     }
     getByTitle=(data)=>{
         let title
@@ -76,7 +67,7 @@ const { confirm } = Modal;
                 title= item.title
             }
             if(item.children){
-               const cItem= item.children.find(x=>x.key===data)
+               const cItem= item.children.find(x=>`${data}`.indexOf( x.key)===0)
                if(cItem){
                 title= cItem.title
                }
@@ -85,7 +76,7 @@ const { confirm } = Modal;
         return title
     }
     render() {
-        const { currentTime, username, currentAdress, currentWeather,temperature } = this.state
+        const { username, currentAdress, currentWeather,temperature } = this.state
         return (
             <div className="header">
                 <div className="header-top">
@@ -95,7 +86,7 @@ const { confirm } = Modal;
                 <div className="header-bottom">
         <div className="left">{this.getByTitle(this.props.location.pathname)}</div>
                     <div className="right">                    
-                        <b><span>{currentTime}</span></b>
+                       
                         <img src={temperatureLogo} alt="加载失败"></img>
                        <span>{temperature}℃</span>
                         <img src={weatherLogo} alt="加载失败"></img>
