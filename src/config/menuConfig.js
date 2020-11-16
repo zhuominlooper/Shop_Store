@@ -1,20 +1,24 @@
 export  const menuList=[
     {
         key:"/home",
+        disabled:true,
         title:"首页",
         icon:''
     },
     {
         key:"/products",
+        disabled:false,
         title:"商品",
         icon:'',
         children:[
             {
                 key:"/category",
+                disabled:false,
                 title:"分类管理",
                 icon:''
             },{
                 key:"/product",
+                disabled:false,
                 title:"商品管理",
                 icon:''
             },
@@ -22,31 +26,37 @@ export  const menuList=[
     },
     {
         key:"/user",
+        disabled:false,
         title:"用户管理",
         icon:''
     },
     {
         key:"/role",
+        disabled:false,
         title:"角色管理",
         icon:''
     },
     {
         key:"/bi",
+        disabled:false,
         title:"BI统计",
         icon:'',
         children:[
            {
                 key:"/chart/line",
+                disabled:false,
                 title:"折线图",
                 icon:''
             },
             {
                 key:"/chart/bar",
+                disabled:false,
                 title:"柱状图",
                 icon:''
             },
             {
                 key:"/chart/pie",
+                disabled:false,
                 title:"饼图",
                 icon:''
             },

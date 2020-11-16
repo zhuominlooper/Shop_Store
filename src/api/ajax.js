@@ -23,7 +23,9 @@ export default function ajax(url, data = {}, type = "GET") {
                 promise = axios.put(url, data);
                 break
             case "DELETE":
-                promise = axios.delete(url, data);
+                promise = axios.delete(url,{
+                    params: data
+                });
                 break
             default:
                 break

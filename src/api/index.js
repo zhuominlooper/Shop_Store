@@ -47,10 +47,17 @@ export const reqAddOrUpdateProduct=(product)=>ajax(`/manage/product/${product._i
 //获取角色的数据
 export  const reqGetRoles=()=>ajax('/manage/role/list')
 
+//添加角色
+export  const reqAddRoles=(...args)=>ajax('/manage/role/add',...args,"POST")
 
+//更新角色权限
+export  const reqUpdateRoles=(...args)=>ajax('/manage/role/update',...args,"POST")
 
+//删除角色
+export  const reqDeleteRoles=(...args)=>ajax('/manage/role/delete',...args,"DELETE")
 
-
+//更改角色状态
+export  const reqUpdateStatusRoles=(...args)=>ajax('/manage/role/status',...args,"PUT")
 
 //使用jsonp发送请求获取天气,不准确
 // export const reqWeather=(city)=>{

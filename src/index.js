@@ -14,6 +14,7 @@ ReactDOM.render(
 );
 
 var mySubscriber = function (msg, data) {
+  console.log(data)
    switch(data){
      case "show":
       window.$('#myModal').modal('show'); break;
