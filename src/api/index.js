@@ -59,6 +59,14 @@ export  const reqDeleteRoles=(...args)=>ajax('/manage/role/delete',...args,"DELE
 //更改角色状态
 export  const reqUpdateStatusRoles=(...args)=>ajax('/manage/role/status',...args,"PUT")
 
+//获取用户列表
+export  const reqGetUsers=()=>ajax('/manage/user/list')
+//冻结或者激活用户
+export  const reqUpdateUsersStatus=(...args)=>ajax('/manage/user/status',...args,'PUT')
+
+//
+export  const reqDeleteUser=(...args)=>ajax('/manage/user/delete',...args,"DELETE")
+
 //使用jsonp发送请求获取天气,不准确
 // export const reqWeather=(city)=>{
 //     return new Promise((resolve,reject)=>{

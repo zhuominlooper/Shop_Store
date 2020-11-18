@@ -18,7 +18,8 @@ export default class RolePage extends React.Component {
       roles:[],//角色列表
       role:{},//选中的role
       showAddModel:false,
-      showSettingRole:false
+      showSettingRole:false,
+      isCanUpdate:true
     }
     //添加role的from
     this.addRoleFormData={}
@@ -29,15 +30,17 @@ export default class RolePage extends React.Component {
    rowSelection = {
     onChange: (key,selectRows) => {
     //设置选中的role
+
      this.setState({
-       role:selectRows[0]
+       role:selectRows[0],
+       isCanUpdate:false
      })
     }
   };
   //添加role
   addRole=async()=>{
     const role_name=this.addRoleFormData.current.getFieldValue('role_name')
-    if(role_name.length<2||role_name.length>4){
+    if(role_name.length<2||role_name.length>6){
       return
     }
     //保存角色
@@ -81,7 +84,7 @@ export default class RolePage extends React.Component {
       const result=await reqGetRoles()
       if(result.code===200){ 
         this.setState({
-          role:{...result.data[0]},
+         role:{...result.data[0]},
           roles:result.data.map(x=>{        
             x.auth_time=dateFormat(x.auth_time)
             x.create_time=dateFormat(x.create_time) 
@@ -98,11 +101,11 @@ export default class RolePage extends React.Component {
 
   render() {
     const {rowSelection}=this
-    const {roles,role,showAddModel,showSettingRole}=this.state
+    const {roles,role,showAddModel,showSettingRole,isCanUpdate}=this.state
     const title = (
       <span>
         <Button className='btn-role-margin' type='primary' onClick={()=>{this.setState({showAddModel:true})}}>创建角色</Button>
-        <Button  disabled={!role._id}  onClick={()=>{this.setState({showSettingRole:true})}} >设置角色权限</Button>
+        <Button  disabled={isCanUpdate}  onClick={()=>{this.setState({showSettingRole:true})}} >设置角色权限</Button>
       </span>
     )
     return (

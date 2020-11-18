@@ -19,7 +19,7 @@ render(){
                     name="role_name"
                     rules={[
                         { required: true, message: '请输入角色名称!' },
-                        { type: "string", max: 4, message: '名称最大4位!' },
+                        { type: "string", max: 6, message: '名称最大6位!' },
                         { type: "string", min: 2, message: '名称至少2位!' },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
