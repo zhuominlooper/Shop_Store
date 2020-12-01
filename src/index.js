@@ -2,19 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import PubSub from 'pubsub-js'
-import  storageUtils  from "./utils/storageUtils";
-import  {memoryUtils}  from "./utils/memoryUtils";
 
 //初始化时候去读取localstorage的user信息，保存在内存中
-memoryUtils.user=storageUtils.getUser()
+
 ReactDOM.render(
  <App/>
 ,
   document.getElementById('root')
 );
-
 var mySubscriber = function (msg, data) {
-  console.log(data)
    switch(data){
      case "show":
       window.$('#myModal').modal('show'); break;

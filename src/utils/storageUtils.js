@@ -1,15 +1,14 @@
 import store from "store";
-const USER_KEY = 'user_key'
 
 export default  {
-    saveUser:  (user) => {
-        store.set(USER_KEY,user)
+    save:  (KEY='user_key',data) => {
+        store.set(KEY,data)
     },
 
-    getUser:() => {
-        return store.get(USER_KEY)||{}
+    getData:(KEY='user_key') => {
+        return store.get(KEY)||{}
     },
-    removeUser :() => {
-        store.remove(USER_KEY)
+    remove:(KEY='user_key') => {
+        store.remove(KEY)
     }
 }

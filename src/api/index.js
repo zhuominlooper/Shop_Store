@@ -64,8 +64,24 @@ export  const reqGetUsers=()=>ajax('/manage/user/list')
 //冻结或者激活用户
 export  const reqUpdateUsersStatus=(...args)=>ajax('/manage/user/status',...args,'PUT')
 
-//
+//删除用户
 export  const reqDeleteUser=(...args)=>ajax('/manage/user/delete',...args,"DELETE")
+
+//获取过去7天注册用户的数量并分组
+export  const reqGetTimeUsers=(...args)=>ajax('/manage/user/line',...args,"POST")
+
+
+//获取当前ip的位置
+export const reqGetAdress=(ip)=>{
+    return axios.get(`https://restapi.amap.com/v3/ip?ip=${ip}&output=json&key=9e07ec400caac94e137736435057c07e`)
+}
+//获取天气信息
+
+export const reqGetWeatherData=(cityCode)=>{
+    return axios.get(`https://restapi.amap.com/v3/weather/weatherInfo?city=${cityCode}&key=e29de05a3343d8f53d9e8a4f3a2fee15&extensions=all`)
+}
+
+
 
 //使用jsonp发送请求获取天气,不准确
 // export const reqWeather=(city)=>{
@@ -83,13 +99,3 @@ export  const reqDeleteUser=(...args)=>ajax('/manage/user/delete',...args,"DELET
 //         })
 //     })   
 // }
-
-//获取当前ip的位置
-export const reqGetAdress=(ip)=>{
-    return axios.get(`https://restapi.amap.com/v3/ip?ip=${ip}&output=json&key=9e07ec400caac94e137736435057c07e`)
-}
-//获取天气信息
-
-export const reqGetWeatherData=(cityCode)=>{
-    return axios.get(`https://restapi.amap.com/v3/weather/weatherInfo?city=${cityCode}&key=e29de05a3343d8f53d9e8a4f3a2fee15`)
-}

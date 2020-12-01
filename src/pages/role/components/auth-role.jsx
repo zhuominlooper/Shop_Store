@@ -1,6 +1,6 @@
 
 import React, { Fragment } from "react";
-import { menuList } from "../../../config/menuConfig";
+import { factoryContext } from "../../../config/context";
 import { Tree, Form, Input } from "antd";
 import { CarryOutOutlined, FormOutlined } from '@ant-design/icons';
 const TreeNode = Tree.TreeNode
@@ -43,7 +43,7 @@ export default class SettingRolePage extends React.Component {
     }
 
     componentWillMount = () => {
-        this.TreeNodeList = this.getTreeNode(menuList)
+        this.TreeNodeList = this.getTreeNode(factoryContext.menuList)
     }
 
     render() {

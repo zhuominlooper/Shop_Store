@@ -2,7 +2,6 @@ import React from "react";
 import { Upload, message, Modal } from 'antd';
 import { reqDeleteImg } from "../../../api/index";
 import { PlusOutlined } from '@ant-design/icons';
-import { BASE_IMG_URL } from "../../../utils/constants";
 //用于上传图片或删除图片的处理
 export default class UploadImagesPage extends React.Component {
     constructor(props) {

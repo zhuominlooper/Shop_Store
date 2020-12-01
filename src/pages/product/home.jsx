@@ -12,10 +12,10 @@ export default class ProductHomePage extends React.Component {
       return(
          <Switch>
              {/* exact表示精确匹配 */}
-           <Route path='/product' component={ProductPage} exact></Route>
-           <Route path='/product/addupdate' component={ProductHandlePage}></Route>
-           <Route path='/product/detail' component={ProductDteailPage}></Route>
-           <Redirect to='/product'></Redirect>
+         
+           <Route path='/page/product/addupdate' component={ProductHandlePage} ></Route>
+           <Route path='/page/product/detail' component={ProductDteailPage} ></Route>
+           <Route path='/page/product' component={ProductPage} ></Route>
          </Switch>
       )
     }

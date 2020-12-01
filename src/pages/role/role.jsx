@@ -7,7 +7,7 @@ import   SettingRolePage from "./components/auth-role";
 import  AddRolePage from "./components/add-role";
 import { Table, Button, Card,Modal, message } from "antd";
 import { reqAddRoles ,reqUpdateRoles} from "../../api/index";
-import { memoryUtils } from "../../utils/memoryUtils";
+import { factoryContext } from "../../config/context";
 
 //角色的组件
 export default class RolePage extends React.Component {
@@ -58,7 +58,7 @@ export default class RolePage extends React.Component {
      const result=await reqUpdateRoles(
        {
         ...role,...{
-          auth_name: memoryUtils.user.username?memoryUtils.user.username:'system',
+          auth_name: factoryContext.memoryUtils.user.username?factoryContext.memoryUtils.user.username:'system',
           auth_time:Date.now(),
           create_time:Date.now(role.create_time),
           menus

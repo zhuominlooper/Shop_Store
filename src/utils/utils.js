@@ -6,5 +6,5 @@ export  function dateFormat(date){
     if(!date){
         return ''
     }
-   return moment(date).format('YYYY-MM-DD hh:mm:ss')
+    return moment(date).format('YYYY-MM-DD hh:mm:ss')
 }

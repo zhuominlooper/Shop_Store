@@ -4,7 +4,7 @@ import './product.less';
 import { Card, Select, Input, Button, Table, message,Tag } from "antd";
 import { PlusOutlined } from '@ant-design/icons';
 import { reqProducts, reqSearchProducts,reqUpdateStatus } from "../../api/index";
-import { PAGE_SIZE } from "../../utils/constants";
+
 
 //商品管理
 const Option = Select.Option
@@ -17,7 +17,7 @@ export default class ProductPage extends React.Component {
       searchType: 'productName'
     }
     this.extra = (
-      <Button type='primary' onClick={()=>this.props.history.push('/product/addupdate')}>
+      <Button type='primary' onClick={()=>this.props.history.push('/page/product/addupdate')}>
         <PlusOutlined />
         添加商品
       </Button>
@@ -77,7 +77,6 @@ export default class ProductPage extends React.Component {
   }
 
   updateStatus=async(status,productId)=>{
-    debugger
     status=status===1?2:1
     const result=await reqUpdateStatus({status,productId})
        if(result.code===200){
@@ -98,14 +97,14 @@ export default class ProductPage extends React.Component {
       const { searchName, searchType } = this.state
       result = await reqSearchProducts({
         pageNum,
-        pageSize: PAGE_SIZE,
+        pageSize: parseInt(process.env.REACT_APP_PAGE_SIZE),
         searchName: searchName ? searchName.trim() : '',
         searchType
       })
     } else {
       result = await reqProducts({
         pageNum,
-        pageSize: PAGE_SIZE
+        pageSize: parseInt(process.env.REACT_APP_PAGE_SIZE)
       })
     }
     if (result.code === 200) {
@@ -148,10 +147,11 @@ export default class ProductPage extends React.Component {
 
         <Table
           pagination={{
+            current:this.currentPageNum,
             showQuickJumper: true,
             responsive: true,
             hideOnSinglePage: true,
-            pageSize: PAGE_SIZE,
+            pageSize: process.env.PAGE_SIZE,
             total,
             showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
             onChange: this.getProducts

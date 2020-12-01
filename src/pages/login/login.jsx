@@ -1,7 +1,7 @@
 import React from "react";
 import './login.less'
-import logo from "../../assets/images/Shopify.png";
 import Cookies from "js-cookie";
+import logo from "../../assets/images/Shopify.png";
 import { Form, Input, message, Button, Checkbox, Modal } from 'antd';
 import PubSub from 'pubsub-js'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
@@ -10,7 +10,7 @@ import RegisterComponent from "../../components/register/register";
 import ReactSimpleVerify from 'react-simple-verify'
 import 'react-simple-verify/dist/react-simple-verify.css'
 import ForgetPwdComponent from "../../components/forgetpwd/forgetpwd";
-import { memoryUtils } from "../../utils/memoryUtils";
+import { factoryContext } from "../../config/context";
 import  storageUtils  from "../../utils/storageUtils";
 import { Redirect } from "react-router-dom";
 //登录的组件
@@ -25,6 +25,7 @@ export default class LoginPage extends React.Component {
             isShowModal: false,
             moveConf: false
         }
+        console.log('login')
     }
 
     //表单提交回调
@@ -66,18 +67,23 @@ export default class LoginPage extends React.Component {
         })
         const result = await reqLogin(this.validData)
         if (result.code === 200) {
+             //登录成功，写入token
+             storageUtils.save('token',result.data.token)
             //是否记住密码
             if (this.isRemPwd) {
-                Cookies.set('userName', this.validData.username, { expires: 30, path: '' });
-                Cookies.set('password', this.validData.password, { expires: 30, path: '' });
+                //实现免登录      
+                Cookies.remove('remember_login');       
+                 Cookies.set('remember_login', true, { expires: 30, path: '' });
             }
-            memoryUtils.user=result.data
-            storageUtils.saveUser(result.data)//永久保存
+            Cookies.remove('is_auto_login');
+            Cookies.set('is_auto_login', true, { expires: 30, path: '' });
+            storageUtils.save('user_key',result.data)//永久保存
+            factoryContext.memoryUtils.user=result.data           
             message.success("登录成功,即将进入主页!")
             this.timer= setTimeout(()=>{
                 //不用push,不需要回退
-                this.props.history.replace('/')
-            },2000)
+                this.props.history.replace( '/page/home')
+            },1500)
         }
 
     }
@@ -99,11 +105,6 @@ export default class LoginPage extends React.Component {
         clearTimeout(this.timer)
     }
     render() {
-        //判断用户是否登录，如果已经登录过，则直接跳转到admin
-        const user=memoryUtils.user
-        if(user&&user._id){
-              return <Redirect to='/'/>
-        }
         const { isShowModal } = this.state
         return (
             <div className="login">

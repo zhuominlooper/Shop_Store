@@ -1,29 +1,28 @@
-import axios from "axios";
-import {
-    message
-} from 'antd';
+import instance from './interceptors'
 import PubSub from 'pubsub-js'
 //发送异步ajax请求的模块,封装axios
 //统一处理异常优化
 export default function ajax(url, data = {}, type = "GET") {
+    //对请求统一加上时间戳，防止浏览器的缓存行为而不调用请求
+    url = `${url}?timestamp=${new Date().getTime()}`
     return new Promise((resolve, reject) => {
         PubSub.publish('Loading', 'show');
         let promise
         //执行请求
         switch (type) {
             case "GET":
-                promise = axios.get(url, {
+                promise = instance.get(url, {
                     params: data
                 });
                 break
             case "POST":
-                promise = axios.post(url, data);
+                promise = instance.post(url, data);
                 break
             case "PUT":
-                promise = axios.put(url, data);
+                promise = instance.put(url, data);
                 break
             case "DELETE":
-                promise = axios.delete(url,{
+                promise = instance.delete(url, {
                     params: data
                 });
                 break
@@ -31,14 +30,14 @@ export default function ajax(url, data = {}, type = "GET") {
                 break
         }
         promise.then(response => {
-            if ([404, 500, 400, 503, 502].indexOf(response.data.code) > -1) {
-                message.warning(response.data.msg)
-                return
+            if (response.status === 200) {
+                resolve({...response.data,code:200})
+            } else {
+                resolve({
+                    code: 404,
+                    data: {}
+                })
             }
-            resolve(response.data)
-        }).catch(err => {
-            message.error(err.message)
-        }).finally(() => {
             PubSub.publish('Loading', 'hide');
         })
     })
