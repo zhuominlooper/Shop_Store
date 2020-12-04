@@ -15,6 +15,7 @@ import PiePage from "../../pages/charts/pie";
 import ProductHomePage from "../../pages/product/home";
 import RolePage from "../../pages/role/role";
 import UserPage from "../../pages/user/user";
+import EpidemicPage from "../../pages/epidemic/epidemic";
 import storageUtils from "../../utils/storageUtils";
 //登录的组件
 const { Header, Footer, Sider, Content } = Layout;
@@ -58,6 +59,7 @@ export default class AdminPage extends React.Component {
              <Route path="/page/chart/bar" component={BarPage} />
              <Route path="/page/chart/line" component={LinePage} />
              <Route path="/page/chart/pie" component={PiePage} />
+             <Route path="/page/epidemic" component={EpidemicPage} />
              <Route path='/page/*' component={UnFindPage} ></Route> 
            </Switch> 
           </Content>

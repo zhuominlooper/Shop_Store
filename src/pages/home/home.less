@@ -1,6 +1,7 @@
 .div-layout {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 
     .panel-heading {
         color: azure !important;
@@ -42,9 +43,11 @@
     }
 }
 
-.panel{
+
+.panel {
     margin-bottom: 0;
 }
+
 .panel-one {
     background-image: linear-gradient(to left, rgb(9, 145, 224), rgb(72, 171, 236));
 }
@@ -60,35 +63,93 @@
 .panel-four {
     background-image: linear-gradient(to left, rgb(179, 20, 241), rgb(227, 109, 243));
 }
-.erte{
-    background-color: chocolate;
-}
+
+
+
 .div-layout-chat {
     display: flex;
-    .div-flex-1 {
-        display: flex;
-        .div-bar {
-            width: 600px;
-            height: 500px;
-        }
+    flex-wrap: wrap;
+    position: relative;
 
-        .div-pie {
-            margin-top: 16px;
-            width: 400px;
-            height: 500px;
-        }
+    .div-flex-1 {
+        flex: 3;
     }
 
     .div-flex-2 {
-        width: 620px;
+        flex: 2;
+
     }
 }
 
-.div-rad{
+.div-rad {
     color: azure;
     text-align: center;
     border-radius: 20%;
     width: 24px;
     height: 24px;
-    background-color:red
+    background-color: red
+}
+
+.shop {
+    display: flex;
+    flex-wrap: wrap;
+
+    .shop_left {
+        flex: 5;
+    }
+
+    .shop_right {
+        margin-left: 16px;
+        flex: 3;
+
+        .div-flex {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            .div-img {
+                position: relative;
+                background-color: rgba(201, 197, 195, 0.875);
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+
+                img {
+                    left: 50%;
+                    top: 50%;
+                    position: absolute;
+                    transform: translate(-50%, -50%);
+                    min-width: 28px;
+                    min-height: 28px;
+                }
+            }
+
+            .div-info {
+                flex: 3;
+                margin-right: 16px;
+                margin-left: 16px;
+                border-right: 1px solid rgb(192, 186, 186);
+
+                h5 {
+                    display: inline;
+                    margin-right: 4px;
+                    text-align: right;
+                }
+            }
+
+            .div-score {
+                flex: 2;
+                text-align: center;
+
+                h5 {
+                    display: inline;
+                    margin-right: 4px;
+                    text-align: right;
+
+                }
+            }
+
+
+        }
+    }
 }

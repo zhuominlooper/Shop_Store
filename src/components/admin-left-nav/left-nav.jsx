@@ -74,15 +74,15 @@ import { factoryContext } from "../../config/context";
     return (
       <div className="left-nav">
         <div>
-        <Link className="left-nav-header">
+        <div className="left-nav-header">
           <img src={logo} alt="shop" />
           <h4>管理后台</h4>
           <br/>
           
-        </Link>
+        </div>
                 
         <div className='header-div'>
-          <Avatar style={{ backgroundColor: 'azure' }} size={50} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+          <Avatar style={{ backgroundColor: 'azure' }} size={50} src={require('../../assets/images/touxiang.png')} />
           <h5 className='header-name'>{username}</h5>
           
           </div>

@@ -63,7 +63,13 @@
                 icon:''
             },
         ]
-    }
+    },
+    {
+        key:"/page/epidemic",
+        disabled:false,
+        title:"疫情监控",
+        icon:''
+    },
 ]
 
 //保存用户信息

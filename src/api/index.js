@@ -80,7 +80,16 @@ export const reqGetAdress=(ip)=>{
 export const reqGetWeatherData=(cityCode)=>{
     return axios.get(`https://restapi.amap.com/v3/weather/weatherInfo?city=${cityCode}&key=e29de05a3343d8f53d9e8a4f3a2fee15&extensions=all`)
 }
+//实时获取全国疫情数据
+export const reqGetEpidemicData=()=>{
+    return axios.get(`http://api.tianapi.com/txapi/ncovcity/index?key=301fe0ecbea1622f96e3ea264d3d6dc7`)
+}
 
+//获取疫情实时新闻
+//实时获取全国疫情数据
+export const reqGetEpidemicNewsData=()=>{
+    return axios.get(`http://api.tianapi.com/txapi/ncov/index?key=301fe0ecbea1622f96e3ea264d3d6dc7`)
+}
 
 
 //使用jsonp发送请求获取天气,不准确
